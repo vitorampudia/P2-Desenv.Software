@@ -1,0 +1,6 @@
+@P2_Desenv.Software_HostAddress = http://localhost:5137
+
+GET {{P2_Desenv.Software_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
