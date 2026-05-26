@@ -10,10 +10,10 @@
         public float Altura { get; set; }
         public Treinador Treinador { get; set; }
         public int TreinadorId { get; set; }
-        public int TreinoId { get; set; }
-        public Treino Treino { get; set; }
+ 
 
-        public Aluno(string nome, string cpf, DateOnly dataNascimento, float peso, float altura, int treinadorId, int treinoId)
+
+        public Aluno(string nome, string cpf, DateOnly dataNascimento, float peso, float altura, int treinadorId)
         {
             Nome = nome;
             Cpf = cpf;
@@ -21,7 +21,7 @@
             Peso = peso;
             Altura = altura;
             TreinadorId = treinadorId;
-            TreinoId = treinoId;
         }
+        private Aluno() { }
     }
 }

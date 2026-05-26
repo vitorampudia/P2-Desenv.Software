@@ -13,5 +13,6 @@
             Cref = cref;
             Especializacao = especializacao;
         }
+        private Treinador() { }
     }
 }

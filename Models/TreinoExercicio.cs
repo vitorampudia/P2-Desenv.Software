@@ -9,5 +9,7 @@
         public float Carga { get; set; }
         public float QtdRepeticoes { get; set; }
         public float QtdSeries { get; set; }
+
+        private TreinoExercicio() { }
     }
 }
