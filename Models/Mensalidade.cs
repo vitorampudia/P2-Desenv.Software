@@ -22,5 +22,6 @@ namespace P2_Desenv.Software.Models
             TipoPagamento = tipoPagamento;
             AlunoId = alunoId;
         }
+        private Mensalidade() { }
     }
 }

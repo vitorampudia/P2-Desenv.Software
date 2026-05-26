@@ -16,5 +16,6 @@
             GrupoMuscular = grupoMuscular;
             Descricao = descricao;
         }
+        private Exercicio() { }
     }
 }

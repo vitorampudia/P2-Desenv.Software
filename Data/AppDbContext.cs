@@ -3,14 +3,21 @@ using P2_Desenv.Software.Models;
 
 namespace P2_Desenv.Software.Data
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) 
-        : DbContext(options)
+    public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
         public DbSet<Aluno> Alunos => Set<Aluno>();
         public DbSet<Mensalidade> Mensalidade => Set<Mensalidade>();
         public DbSet<Treinador> Treinador => Set<Treinador>();
         public DbSet<Treino> Treino => Set<Treino>();
         public DbSet<TreinoExercicio> TreinoExercicios => Set<TreinoExercicio>();
         public DbSet<Exercicio> Exercicio => Set<Exercicio>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TreinoExercicio>()
+                .HasKey(te => new { te.TreinoId, te.ExercicioId });
+        }
     }
 }

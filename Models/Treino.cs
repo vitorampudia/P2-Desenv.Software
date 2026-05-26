@@ -17,5 +17,6 @@
             TreinadorId = treinadorId;
             TreinoExercicios = treinoExercicios;
         }
+        private Treino() { }
     }
 }

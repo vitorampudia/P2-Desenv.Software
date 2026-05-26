@@ -1,3 +1,5 @@
+using P2_Desenv.Software.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace P2_Desenv.Software
 {
@@ -7,10 +9,12 @@ namespace P2_Desenv.Software
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddAuthorization();
+            builder.Services.AddControllers();
 
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite("Data Source=app.db"));
+
+            builder.Services.AddAuthorization();
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
@@ -19,9 +23,7 @@ namespace P2_Desenv.Software
 
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi(); // Gera o JSON do .NET em: /openapi/v1.json
-
-                // Configura a interface antiga para ler o JSON novo
+                app.MapOpenApi();
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/openapi/v1.json", "Minha API v1");
@@ -29,7 +31,7 @@ namespace P2_Desenv.Software
             }
 
             app.UseAuthorization();
-
+            app.MapControllers();
             app.Run();
         }
     }
