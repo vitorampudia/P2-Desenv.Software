@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using P2_Desenv.Software.Data;
 
@@ -10,9 +11,11 @@ using P2_Desenv.Software.Data;
 namespace P2_Desenv.Software.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260607160128_CriarTabelaExercicios")]
+    partial class CriarTabelaExercicios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
@@ -48,6 +51,29 @@ namespace P2_Desenv.Software.Migrations
                     b.HasIndex("TreinadorId");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("P2_Desenv.Software.Models.Exercicio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GrupoMuscular")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exercicio");
                 });
 
             modelBuilder.Entity("P2_Desenv.Software.Models.Mensalidade", b =>
@@ -149,31 +175,6 @@ namespace P2_Desenv.Software.Migrations
                     b.ToTable("TreinoExercicios");
                 });
 
-            modelBuilder.Entity("P2_Desenv_Software.Models.Exercicio", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Grupo")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("GrupoMuscular")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Exercicios");
-                });
-
             modelBuilder.Entity("P2_Desenv.Software.Models.Aluno", b =>
                 {
                     b.HasOne("P2_Desenv.Software.Models.Treinador", "Treinador")
@@ -217,7 +218,7 @@ namespace P2_Desenv.Software.Migrations
 
             modelBuilder.Entity("P2_Desenv.Software.Models.TreinoExercicio", b =>
                 {
-                    b.HasOne("P2_Desenv_Software.Models.Exercicio", "Exercicio")
+                    b.HasOne("P2_Desenv.Software.Models.Exercicio", "Exercicio")
                         .WithMany()
                         .HasForeignKey("ExercicioId")
                         .OnDelete(DeleteBehavior.Cascade)
