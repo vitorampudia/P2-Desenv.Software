@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using P2_Desenv.Software.Models;
+using P2_Desenv_Software.Models;
 
 namespace P2_Desenv.Software.Data
 {
@@ -12,8 +13,7 @@ namespace P2_Desenv.Software.Data
         public DbSet<Treinador> Treinador => Set<Treinador>();
         public DbSet<Treino> Treino => Set<Treino>();
         public DbSet<TreinoExercicio> TreinoExercicios => Set<TreinoExercicio>();
-        public DbSet<Exercicio> Exercicio => Set<Exercicio>();
-
+        public DbSet<Exercicio> Exercicios { get ; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TreinoExercicio>()

@@ -1,4 +1,8 @@
-﻿namespace P2_Desenv.Software.Models
+﻿using P2_Desenv_Software.Models;
+using System.ComponentModel.DataAnnotations;
+using System;
+
+namespace P2_Desenv_Software.Models
 {
     public class TreinoExercicio
     {
