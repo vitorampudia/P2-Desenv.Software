@@ -1,6 +1,6 @@
 using P2_Desenv.Software.Data;
 using Microsoft.EntityFrameworkCore;
-
+using P2_Desenv.Software.EndPoints;
 namespace P2_Desenv.Software
 {
     public class Program
@@ -30,6 +30,8 @@ namespace P2_Desenv.Software
                 });
             }
 
+            app.MapAlunoEndPoints();
+            app.MapTreinadorEndPoints();
             app.UseAuthorization();
             app.MapControllers();
             app.Run();

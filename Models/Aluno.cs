@@ -1,4 +1,5 @@
-﻿namespace P2_Desenv.Software.Models
+﻿using System.Text.Json.Serialization;
+namespace P2_Desenv.Software.Models
 {
     public class Aluno
     {
@@ -8,6 +9,8 @@
         public DateOnly DataNascimento { get; set; }
         public float Peso { get; set; }
         public float Altura { get; set; }
+
+        [JsonIgnore]
         public Treinador Treinador { get; set; }
         public int TreinadorId { get; set; }
  

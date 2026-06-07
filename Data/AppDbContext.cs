@@ -18,6 +18,19 @@ namespace P2_Desenv.Software.Data
         {
             modelBuilder.Entity<TreinoExercicio>()
                 .HasKey(te => new { te.TreinoId, te.ExercicioId });
+            
+            modelBuilder.Entity<Aluno>()
+                .HasIndex(a => a.Cpf)
+                .IsUnique();
+
+            modelBuilder.Entity<Treinador>()
+                .HasIndex(t => t.Cref)
+                .IsUnique();
+
+            modelBuilder.Entity<Aluno>()
+                .HasOne(a => a.Treinador)
+                .WithMany(t => t.Alunos)
+                .HasForeignKey(a => a.TreinadorId);
         }
     }
 }
