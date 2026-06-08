@@ -1,11 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
 using P2_Desenv.Software.EndPoints;
-=======
 using P2_Desenv.Software.Data;
 using P2_Desenv_Software.Models;
-
->>>>>>> 0fb5cec4061e6b9f16de8e3ec668325bedb82982
 namespace P2_Desenv.Software
 {
     public class Program
@@ -38,13 +34,11 @@ namespace P2_Desenv.Software
                     options.SwaggerEndpoint("/openapi/v1.json", "Minha API v1");
                 });
             }
-<<<<<<< HEAD
+
 
             app.MapAlunoEndPoints();
             app.MapTreinadorEndPoints();
-=======
             app.UseCors("AllowAll");
->>>>>>> 0fb5cec4061e6b9f16de8e3ec668325bedb82982
             app.UseAuthorization();
             app.MapControllers();
             app.Run();

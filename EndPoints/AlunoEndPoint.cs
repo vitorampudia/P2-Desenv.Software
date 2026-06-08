@@ -113,6 +113,7 @@ namespace P2_Desenv.Software.EndPoints
                 aluno.Altura = updateAluno.Altura;
                 aluno.Peso = updateAluno.Peso;
                 aluno.TreinadorId = updateAluno.TreinadorId;
+
                 await db.SaveChangesAsync();
                 return Results.NoContent();
 ;            });
