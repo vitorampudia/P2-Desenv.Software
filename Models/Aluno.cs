@@ -13,7 +13,9 @@ namespace P2_Desenv.Software.Models
         [JsonIgnore]
         public Treinador Treinador { get; set; }
         public int TreinadorId { get; set; }
- 
+
+        public ICollection<Mensalidade> Mensalidades { get; set; }
+
 
 
         public Aluno(string nome, string cpf, DateOnly dataNascimento, float peso, float altura, int treinadorId)

@@ -34,7 +34,7 @@ namespace P2_Desenv.Software
                 });
             }
 
-
+            app.MapMensalidadeEndPoints();
             app.MapAlunoEndPoints();
             app.MapTreinadorEndPoints();
             app.MapExercicioEndPoints();

@@ -14,6 +14,7 @@ namespace P2_Desenv.Software.Data
         public DbSet<Treino> Treino => Set<Treino>();
         public DbSet<TreinoExercicio> TreinoExercicios => Set<TreinoExercicio>();
         public DbSet<Exercicio> Exercicios { get ; set; }
+        public DbSet<Mensalidade> Mensalidades { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TreinoExercicio>()
@@ -44,6 +45,11 @@ namespace P2_Desenv.Software.Data
                 .HasOne(te => te.Exercicio)
                 .WithMany(e => e.TreinoExercicios)
                 .HasForeignKey(te => te.ExercicioId);
+
+            modelBuilder.Entity<Mensalidade>()
+                .HasOne(m => m.Aluno)
+                .WithMany(a => a.Mensalidades)
+                .HasForeignKey(m => m.AlunoId);
         }
     }
 }
