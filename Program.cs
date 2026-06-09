@@ -38,6 +38,7 @@ namespace P2_Desenv.Software
             app.MapAlunoEndPoints();
             app.MapTreinadorEndPoints();
             app.MapExercicioEndPoints();
+            app.MapTreinoEndPoint();
             app.UseCors("AllowAll");
             app.UseAuthorization();
             app.Run();

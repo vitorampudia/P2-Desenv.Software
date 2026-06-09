@@ -11,7 +11,7 @@ namespace P2_Desenv.Software.Data
         public DbSet<Aluno> Alunos => Set<Aluno>();
         public DbSet<Mensalidade> Mensalidade => Set<Mensalidade>();
         public DbSet<Treinador> Treinador => Set<Treinador>();
-        public DbSet<Treino> Treino => Set<Treino>();
+        public DbSet<Treino> Treinos => Set<Treino>();
         public DbSet<TreinoExercicio> TreinoExercicios => Set<TreinoExercicio>();
         public DbSet<Exercicio> Exercicios { get ; set; }
         public DbSet<Mensalidade> Mensalidades { get; set; }
