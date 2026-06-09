@@ -14,7 +14,6 @@ namespace P2_Desenv.Software
             {
                 options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-            builder.Services.AddControllers();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite("Data Source=app.db"));
@@ -38,9 +37,9 @@ namespace P2_Desenv.Software
 
             app.MapAlunoEndPoints();
             app.MapTreinadorEndPoints();
+            app.MapExercicioEndPoints();
             app.UseCors("AllowAll");
             app.UseAuthorization();
-            app.MapControllers();
             app.Run();
         }
     }

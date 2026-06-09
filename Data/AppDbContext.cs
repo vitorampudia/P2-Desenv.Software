@@ -31,6 +31,11 @@ namespace P2_Desenv.Software.Data
                 .HasOne(a => a.Treinador)
                 .WithMany(t => t.Alunos)
                 .HasForeignKey(a => a.TreinadorId);
+
+            modelBuilder.Entity<Exercicio>()
+                .HasMany(e => e.Treino)
+                .WithOne(te => te.Exercicio)
+                .HasForeignKey(te => te.ExercicioId);
         }
     }
 }
