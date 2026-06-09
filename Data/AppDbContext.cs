@@ -32,9 +32,17 @@ namespace P2_Desenv.Software.Data
                 .WithMany(t => t.Alunos)
                 .HasForeignKey(a => a.TreinadorId);
 
-            modelBuilder.Entity<Exercicio>()
-                .HasMany(e => e.Treino)
-                .WithOne(te => te.Exercicio)
+            modelBuilder.Entity<TreinoExercicio>()
+                .HasKey(te => new { te.TreinoId, te.ExercicioId });
+
+            modelBuilder.Entity<TreinoExercicio>()
+                .HasOne(te => te.Treino)
+                .WithMany(t => t.TreinoExercicios)
+                .HasForeignKey(te => te.TreinoId);
+
+            modelBuilder.Entity<TreinoExercicio>()
+                .HasOne(te => te.Exercicio)
+                .WithMany(e => e.TreinoExercicios)
                 .HasForeignKey(te => te.ExercicioId);
         }
     }

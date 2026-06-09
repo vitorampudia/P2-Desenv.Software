@@ -9,23 +9,39 @@ namespace P2_Desenv.Software.EndPoints
         {
             app.MapGet("/treinadores", async (AppDbContext db) =>
             {
-                var treinadores = await db.Treinador.ToListAsync();
-                return Results.Ok(treinadores);
+                try
+                {
+                    var treinadores = await db.Treinador.ToListAsync();
+                    return Results.Ok(treinadores);
+                }
+                catch (Exception ex)
+                {
+                    return Results.Problem(ex.Message);
+                }
             });
 
             app.MapGet("/treinadores/{id}", async (int id, AppDbContext db) =>
             {
-                var treinador = await db.Treinador.FindAsync(id);
-                if (treinador == null)
+                try
                 {
-                    return Results.NotFound();
+                    var treinador = await db.Treinador.FindAsync(id);
+                    if (treinador == null)
+                    {
+                        return Results.NotFound();
+                    }
+                    return Results.Ok(treinador);
                 }
-                return Results.Ok(treinador);
+                catch (Exception ex)
+                {
+                    return Results.Problem(ex.Message);
+                }
             });
 
             app.MapPost("/treinadores", async (Treinador treinador, AppDbContext db) =>
             {
-                if (string.IsNullOrWhiteSpace(treinador.Nome) || string.IsNullOrWhiteSpace(treinador.Cref) || string.IsNullOrWhiteSpace(treinador.Especializacao))
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(treinador.Nome) || string.IsNullOrWhiteSpace(treinador.Cref) || string.IsNullOrWhiteSpace(treinador.Especializacao))
                 {
                     return Results.BadRequest("Nome, CREF e Especialização são obrigatórios.");
                 }
@@ -38,40 +54,59 @@ namespace P2_Desenv.Software.EndPoints
                 db.Treinador.Add(treinador);
                 await db.SaveChangesAsync();
                 return Results.Created($"/treinadores/{treinador.Id}", treinador);
+                }
+                catch (Exception ex)
+                {
+                    return Results.Problem(ex.Message);
+                }
             });
 
             app.MapDelete("/treinadores/{id}", async (int id, AppDbContext db) =>
             {
-                var treinador = await db.Treinador.FindAsync(id);
-                if (treinador == null)
+                try
                 {
-                    return Results.NotFound();
+                    var treinador = await db.Treinador.FindAsync(id);
+                    if (treinador == null)
+                    {
+                        return Results.NotFound();
+                    }
+                    db.Treinador.Remove(treinador);
+                    await db.SaveChangesAsync();
+                    return Results.NoContent();
                 }
-                db.Treinador.Remove(treinador);
-                await db.SaveChangesAsync();
-                return Results.NoContent();
+                catch (Exception ex)
+                {
+                    return Results.Problem(ex.Message);
+                }
             });
 
             app.MapPut("/treinadores/{id}", async (int id, Treinador updatedTreinador, AppDbContext db) =>
             {
-                var treinador = await db.Treinador.FindAsync(id);
-                if (treinador == null)
+                try
                 {
-                    return Results.NotFound();
+                    var treinador = await db.Treinador.FindAsync(id);
+                    if (treinador == null)
+                    {
+                        return Results.NotFound();
+                    }
+                    if (string.IsNullOrWhiteSpace(updatedTreinador.Nome) || string.IsNullOrWhiteSpace(updatedTreinador.Cref) || string.IsNullOrWhiteSpace(updatedTreinador.Especializacao))
+                    {
+                        return Results.BadRequest("Nome, CREF e Especialização são obrigatórios.");
+                    }
+                    if (await db.Treinador.AnyAsync(t => t.Cref == updatedTreinador.Cref && t.Id != id))
+                    {
+                        return Results.BadRequest("Já existe um treinador com este CREF.");
+                    }
+                    treinador.Nome = updatedTreinador.Nome;
+                    treinador.Cref = updatedTreinador.Cref;
+                    treinador.Especializacao = updatedTreinador.Especializacao;
+                    await db.SaveChangesAsync();
+                    return Results.Ok(treinador);
                 }
-                if (string.IsNullOrWhiteSpace(updatedTreinador.Nome) || string.IsNullOrWhiteSpace(updatedTreinador.Cref) || string.IsNullOrWhiteSpace(updatedTreinador.Especializacao))
+                catch (Exception ex)
                 {
-                    return Results.BadRequest("Nome, CREF e Especialização são obrigatórios.");
+                    return Results.Problem(ex.Message);
                 }
-                if (await db.Treinador.AnyAsync(t => t.Cref == updatedTreinador.Cref && t.Id != id))
-                {
-                    return Results.BadRequest("Já existe um treinador com este CREF.");
-                }
-                treinador.Nome = updatedTreinador.Nome;
-                treinador.Cref = updatedTreinador.Cref;
-                treinador.Especializacao = updatedTreinador.Especializacao;
-                await db.SaveChangesAsync();
-                return Results.Ok(treinador);
             });
         }
     }
