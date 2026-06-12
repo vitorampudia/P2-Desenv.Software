@@ -14,6 +14,17 @@ namespace P2_Desenv_Software.Models
         public float QtdRepeticoes { get; set; }
         public float QtdSeries { get; set; }
 
-        private TreinoExercicio() { }
+        public TreinoExercicio() { }
+        public TreinoExercicio(int treinoId, Treino treino, int exercicioId, Exercicio exercicio, float carga, float qtdRepeticoes, float qtdSeries) 
+        {
+            TreinoId = treinoId;
+            Treino = treino;
+            Exercicio = exercicio;
+            ExercicioId = exercicioId;
+            Carga = carga;
+            QtdRepeticoes = qtdRepeticoes;
+            QtdSeries = qtdSeries;
+        }
+
     }
 }

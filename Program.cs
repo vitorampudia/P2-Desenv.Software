@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using P2_Desenv.Software.EndPoints;
 using P2_Desenv.Software.Data;
+using P2_Desenv.Software.EndPoints;
 using P2_Desenv_Software.Models;
+using System.Text.Json.Serialization;
 namespace P2_Desenv.Software
 {
     public class Program
@@ -21,7 +22,15 @@ namespace P2_Desenv.Software
             builder.Services.AddAuthorization();
             builder.Services.AddOpenApi();
 
+
+            builder.Services.ConfigureHttpJsonOptions(options =>
+            {
+                options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.SerializerOptions.WriteIndented = true;
+            });
+
             var app = builder.Build();
+
 
             app.UseHttpsRedirection();
 
